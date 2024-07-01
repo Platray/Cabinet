@@ -1,0 +1,30 @@
+
+
+{% extends 'base.twig' %}
+
+{% block title %}
+    <title>page Actualites</title>
+{% endblock %}
+
+{% block body %}
+
+{% include 'partials/menu.twig' %}
+
+{# {% for post in posts %}
+
+<p>{{post.title}}</p>
+
+{% endfor %} #}
+
+<!DOCTYPE html>
+
+    <h1>Blog</h1>
+    <ul>
+        {% for post in posts %}
+            <li><a href="/blog/view?id= post.id"> htmlspecialchars()post.title</a></li>
+            <li> htmlspecialchars()post.content</li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
