@@ -161,16 +161,6 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
 \t\t\t\t\t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t\t\t\t\t\t<p class=\"lead-footer\">* On vous contactera pour valider votre rendez-vous</p>
                                             ";
-<<<<<<< HEAD
-        // line 100
-        if (($context["error_message"] ?? null)) {
-            // line 101
-            yield "                                            <p class=\"lead-footer\" style=\"color:red\"> Erreur lors de la prise de rendez vous</p>
-                                            ";
-        }
-        // line 103
-        yield "\t\t\t\t\t\t\t\t\t\t</form>
-=======
                 // line 103
                 if (($context["error_message"] ?? null)) {
                     // line 104
@@ -179,7 +169,6 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
                 }
                 // line 106
                 yield "\t\t\t\t\t\t\t\t\t\t</form>
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 
 
 \t\t\t\t\t\t\t\t\t</div>
@@ -187,9 +176,6 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
 
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
-<<<<<<< HEAD
-\t\t\t\t\t</div>
-=======
 \t\t\t\t\t\t";
             } elseif ((CoreExtension::getAttribute($this->env, $this->source,             // line 114
 ($context["user"] ?? null), "isAdmin", [], "any", false, false, false, 114) == 1)) {
@@ -280,7 +266,6 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
         }
         // line 165
         yield "\t\t\t\t\t</div>
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 \t\t\t\t</div>
 \t\t\t</div>
 \t\t</div>
@@ -313,11 +298,7 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
      */
     public function getDebugInfo()
     {
-<<<<<<< HEAD
-        return array (  160 => 103,  156 => 101,  154 => 100,  89 => 37,  85 => 36,  48 => 3,  37 => 1,);
-=======
         return array (  265 => 165,  245 => 147,  241 => 146,  235 => 142,  223 => 136,  219 => 135,  213 => 132,  208 => 130,  204 => 129,  200 => 128,  197 => 127,  193 => 126,  180 => 115,  178 => 114,  168 => 106,  164 => 104,  162 => 103,  108 => 51,  105 => 50,  103 => 49,  89 => 37,  85 => 36,  48 => 3,  37 => 1,);
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     }
 
     public function getSourceContext()
@@ -370,12 +351,9 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
 \t\t\t\t<div class=\"row d-flex-center\">
 
 \t\t\t\t\t<div class=\"col-lg-6\">
-<<<<<<< HEAD
-=======
 \t\t\t\t\t{% if user.isAdmin != 0  and user.isAdmin != 1 %}
 \t\t\t\t\t\t{% if user.isAdmin == 0 %}
 
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 \t\t\t\t\t\t<div class=\"form-wrapper\">
 \t\t\t\t\t\t\t<div class=\"wow fadeInRight\" data-wow-duration=\"2s\" data-wow-delay=\"0.2s\">
 
@@ -438,8 +416,6 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
 
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
-<<<<<<< HEAD
-=======
 \t\t\t\t\t\t{% elseif user.isAdmin == 1 %}
 \t\t\t\t\t\t\t<h1>Liste des Bookings</h1>
 \t\t\t\t\t\t\t<table>
@@ -491,7 +467,6 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</p>
 \t\t\t\t\t{% endif %}
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 \t\t\t\t\t</div>
 \t\t\t\t</div>
 \t\t\t</div>

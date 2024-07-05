@@ -32,14 +32,6 @@ class ComposerStaticInit19b0974c8ed31292a8cd7bea470e26f5
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
-<<<<<<< HEAD
-        'A' => 
-        array (
-            'App\\Model\\' => 10,
-            'App\\Controller\\' => 15,
-        ),
-=======
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     );
 
     public static $prefixDirsPsr4 = array (
@@ -63,17 +55,6 @@ class ComposerStaticInit19b0974c8ed31292a8cd7bea470e26f5
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-<<<<<<< HEAD
-        'App\\Model\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/models',
-        ),
-        'App\\Controller\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/controllers',
-        ),
-=======
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     );
 
     public static $classMap = array (

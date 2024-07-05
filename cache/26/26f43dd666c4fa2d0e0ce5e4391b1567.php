@@ -28,13 +28,9 @@ class __TwigTemplate_0227e6fc648516e56656a5a2bd0b2d12 extends Template
         $this->parent = false;
 
         $this->blocks = [
-<<<<<<< HEAD
-            'body' => [$this, 'block_body'],
-=======
             'title' => [$this, 'block_title'],
             'body' => [$this, 'block_body'],
             'content' => [$this, 'block_content'],
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
         ];
     }
 
@@ -63,24 +59,6 @@ class __TwigTemplate_0227e6fc648516e56656a5a2bd0b2d12 extends Template
 \t<!-- template skin -->
 \t<link id=\"t-colors\" href=\"color/default.css\" rel=\"stylesheet\">
     <!-- TEMPLATE FIN skin -->
-<<<<<<< HEAD
-</head>
-
-    ";
-        // line 24
-        yield from         $this->loadTemplate("partials/menu.twig", "base.twig", 24)->unwrap()->yield($context);
-        // line 25
-        yield "
-    ";
-        // line 26
-        yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 29
-        yield "
-    ";
-        // line 30
-        yield from         $this->loadTemplate("partials/footer.twig", "base.twig", 30)->unwrap()->yield($context);
-        // line 31
-=======
     ";
         // line 22
         yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
@@ -101,20 +79,12 @@ class __TwigTemplate_0227e6fc648516e56656a5a2bd0b2d12 extends Template
         // line 34
         yield from         $this->loadTemplate("partials/footer.twig", "base.twig", 34)->unwrap()->yield($context);
         // line 35
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
         yield "</html>
 
 ";
         return; yield '';
     }
 
-<<<<<<< HEAD
-    // line 26
-    public function block_body($context, array $blocks = [])
-    {
-        $macros = $this->macros;
-        yield "
-=======
     // line 22
     public function block_title($context, array $blocks = [])
     {
@@ -134,13 +104,10 @@ class __TwigTemplate_0227e6fc648516e56656a5a2bd0b2d12 extends Template
         yield from $this->unwrap()->yieldBlock('content', $context, $blocks);
         // line 31
         yield "    </div>
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     ";
         return; yield '';
     }
 
-<<<<<<< HEAD
-=======
     // line 29
     public function block_content($context, array $blocks = [])
     {
@@ -149,7 +116,6 @@ class __TwigTemplate_0227e6fc648516e56656a5a2bd0b2d12 extends Template
         return; yield '';
     }
 
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     /**
      * @codeCoverageIgnore
      */
@@ -171,11 +137,7 @@ class __TwigTemplate_0227e6fc648516e56656a5a2bd0b2d12 extends Template
      */
     public function getDebugInfo()
     {
-<<<<<<< HEAD
-        return array (  83 => 26,  76 => 31,  74 => 30,  71 => 29,  69 => 26,  66 => 25,  64 => 24,  39 => 1,);
-=======
         return array (  112 => 29,  106 => 31,  104 => 29,  101 => 28,  97 => 27,  89 => 22,  82 => 35,  80 => 34,  77 => 33,  75 => 27,  72 => 26,  70 => 25,  66 => 23,  64 => 22,  41 => 1,);
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     }
 
     public function getSourceContext()
@@ -201,23 +163,16 @@ class __TwigTemplate_0227e6fc648516e56656a5a2bd0b2d12 extends Template
 \t<!-- template skin -->
 \t<link id=\"t-colors\" href=\"color/default.css\" rel=\"stylesheet\">
     <!-- TEMPLATE FIN skin -->
-<<<<<<< HEAD
-=======
     {% block title %}Mon Site{% endblock %}
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 </head>
 
     {% include 'partials/menu.twig' %}
 
     {% block body %}
-<<<<<<< HEAD
-
-=======
     <div id=\"content\">
             {% block content %}
             {% endblock %}
     </div>
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     {% endblock %}
 
     {% include 'partials/footer.twig' %}
