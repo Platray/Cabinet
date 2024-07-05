@@ -1,10 +1,7 @@
 <?php
-<<<<<<< HEAD
-=======
    if (session_status() === PHP_SESSION_NONE) {
     session_start();
     }
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     
     require_once __DIR__ . '/../vendor/autoload.php';
     require_once __DIR__ . '/../controllers/FrontController.php';
@@ -14,12 +11,6 @@
     require_once __DIR__ . '/../config/Database.php';
     require_once '../bootstrap.php'; // Inclut la configuration Twig
 
-<<<<<<< HEAD
-   // Démarrage de la session
-    session_start();
-
-=======
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     // Création de l'instance de Twig
     $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../views');
     $twig = new \Twig\Environment($loader, [
@@ -32,11 +23,7 @@
     // Instance des contrôleurs
     $frontController = new FrontController($twig);
     $userController = new UserController($twig);
-<<<<<<< HEAD
-
-=======
     $authController = new AuthController($twig);
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     $bookingController = new BookingController($twig);
 
 
@@ -49,8 +36,6 @@
     $route = $uriParts[0];
     $queryString = $uriParts[1] ?? '';
 
-<<<<<<< HEAD
-=======
     function isLoggedIn() {
         return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
     }
@@ -58,19 +43,13 @@
     function isAdmin() {
         return isset($_SESSION['user_is_admin']) && $_SESSION['user_is_admin'] == 1;
     }
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 
 
     switch ($route) {
       
 
         case '/':
-<<<<<<< HEAD
-            $lastPosts = $frontController->getLastPosts();
-            echo $twig->render('home.twig', ['posts' => $lastPosts]);
-=======
             echo $twig->render('home.twig');
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
             break;
 
         case '/contact':
@@ -83,13 +62,6 @@
             break;
 
         case '/booking':
-<<<<<<< HEAD
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $bookingController->create();
-            } else {
-                echo $twig->render('booking.twig');
-            }
-=======
             //verif log
             if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
                 // Redirige l'utilisateur n'est pas connecté
@@ -133,7 +105,6 @@
                 echo $twig->render('users.twig', ['users' => $user]);
             }
             break;
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 
         case '/register':
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -144,11 +115,6 @@
             break;
         
         case '/login':
-<<<<<<< HEAD
-            echo $twig->render('login.twig');
-            break;
-
-=======
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $authController->login($_POST['email'], $_POST['password']);
             } else {
@@ -161,7 +127,6 @@
             break;
         
 
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 
         default:
             http_response_code(404);

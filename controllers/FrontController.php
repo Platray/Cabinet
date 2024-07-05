@@ -23,21 +23,7 @@ class FrontController {
         echo $this->twig->render('contact');
     }
 
-<<<<<<< HEAD
-    public function actualites() {
-        echo $this->twig->render('actualites');
-    }
-
-    public function booking() {
-        echo $this->twig->render('booking');
-    }
-
-    public function register() {
-        echo $this->twig->render('register');
-    }
-=======
     
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 
     //Fonctions posts
     public function getLastPosts() {
@@ -49,11 +35,8 @@ class FrontController {
     }
 
     
-<<<<<<< HEAD
-=======
 
     
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
      
 
    

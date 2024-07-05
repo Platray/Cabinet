@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    {% include 'menu.twig' %}
-    <h1>Login</h1>
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
-    <form method="post" action="/public/login">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
-=======
 {% extends 'base.twig' %}
 {% block title %}
 	<head>
@@ -111,4 +87,3 @@
 {% endblock %}
 
                         
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6

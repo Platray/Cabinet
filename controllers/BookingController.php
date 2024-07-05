@@ -21,21 +21,6 @@ class BookingController {
         echo $this->twig->render('booking.twig');
     }
 
-<<<<<<< HEAD
-    public function create() {
-        $postData = $_POST;
-
-        $result = $this->bookingModel->createBooking($postData);
-
-        if ($result['success']) {
-            echo $this->twig->render('home.twig', ['message' => 'Réservation effectuée avec succès!']);
-            
-        } else {
-            // Afficher le formulaire avec un message d'erreur
-            echo $this->twig->render('booking.twig', ['error_message' => 'Erreur : test existant ' . $result['message']]);
-        }
-    }
-=======
     public function showBookings() {
         $bookings = $this->bookingModel->getBookings();
         echo $this->twig->render('booking/listbooking.twig', ['bookings' => $bookings]);
@@ -106,7 +91,6 @@ class BookingController {
         }
     }
     
->>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 }
 
 // // Debug: Afficher les données reçues
