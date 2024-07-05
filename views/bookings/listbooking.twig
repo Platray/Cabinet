@@ -1,0 +1,47 @@
+{% extends "base.twig" %}
+
+{% block title %}
+    <title>Liste des réservations</title>
+{% endblock %}
+
+
+{% block content %}
+<h1>Liste des Réservations</h1>
+
+{% if bookings is defined and bookings is not empty %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom du Patient</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.id }}</td>
+                    <td>{{ booking.patient_name }}</td>
+                    <td>{{ booking.date }}</td>
+                    <td>
+                        <form method="post" action="/deleteBooking/{{ booking.id }}" style="display:inline;">
+                            <button type="submit">Supprimer</button>
+                        </form>
+                        <form method="post" action="/updateBooking/{{ booking.id }}" style="display:inline;">
+                            <input type="text" name="date" value="{{ booking.date }}">
+                            <button type="submit">Modifier</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Aucune réservation disponible.</p>
+{% endif %}
+
+{% if message is defined %}
+    <p>{{ message }}</p>
+{% endif %}
+{% endblock %}

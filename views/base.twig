@@ -19,12 +19,23 @@
 	<!-- template skin -->
 	<link id="t-colors" href="color/default.css" rel="stylesheet">
     <!-- TEMPLATE FIN skin -->
+<<<<<<< HEAD
+=======
+    {% block title %}Mon Site{% endblock %}
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 </head>
 
     {% include 'partials/menu.twig' %}
 
     {% block body %}
+<<<<<<< HEAD
 
+=======
+    <div id="content">
+            {% block content %}
+            {% endblock %}
+    </div>
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     {% endblock %}
 
     {% include 'partials/footer.twig' %}

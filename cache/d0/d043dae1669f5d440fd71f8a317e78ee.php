@@ -34,6 +34,10 @@ class __TwigTemplate_ae1bb679fa0b84fdb1ee758b172b4d66 extends Template
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
+<<<<<<< HEAD
+=======
+        // line 1
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
         yield "<div id=\"wrapper\">
 
 <nav class=\"navbar navbar-custom navbar-fixed-top\" role=\"navigation\">
@@ -64,6 +68,7 @@ class __TwigTemplate_ae1bb679fa0b84fdb1ee758b172b4d66 extends Template
             <div class=\"collapse navbar-collapse navbar-right navbar-main-collapse\">
 \t\t\t      <ul class=\"nav navbar-nav\">
 
+<<<<<<< HEAD
               <li><a href=\"/\">Accueil</a></li>
 
               <li><a href=\"/contact\">contact</a></li>
@@ -76,6 +81,40 @@ class __TwigTemplate_ae1bb679fa0b84fdb1ee758b172b4d66 extends Template
 
         
 \t\t\t  </ul>
+=======
+                    <li><a href=\"/\">Accueil</a></li>
+
+                    <li><a href=\"/contact\">Contact</a></li>
+
+                    <li><a href=\"/actualites\">Actualites</a></li>
+                    ";
+        // line 36
+        if (CoreExtension::getAttribute($this->env, $this->source, ($context["session"] ?? null), "logged_in", [], "any", false, false, false, 36)) {
+            // line 37
+            yield "                        ";
+            if (CoreExtension::getAttribute($this->env, $this->source, ($context["session"] ?? null), "user_is_admin", [], "any", false, false, false, 37)) {
+                // line 38
+                yield "                            <li><a href=\"/bookings/listbooking\">Liste Consultations</a></li>
+                            <li><a href=\"/users/listuser\">Liste utilisateurs</a></li>
+                        ";
+            } else {
+                // line 41
+                yield "                            <li><a href=\"/booking\">Booking</a></li>
+                        ";
+            }
+            // line 43
+            yield "                        <li><a href=\"/logout\">Déconnexion</a></li>
+                    ";
+        } else {
+            // line 45
+            yield "                        <li><a href=\"/booking\">Booking</a></li>
+                        <li><a href=\"/register\">Inscription</a></li>
+                        <li><a href=\"/booking\">Connexion</a></li>
+                    ";
+        }
+        // line 49
+        yield "\t\t\t        </ul>
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -97,9 +136,23 @@ class __TwigTemplate_ae1bb679fa0b84fdb1ee758b172b4d66 extends Template
     /**
      * @codeCoverageIgnore
      */
+<<<<<<< HEAD
     public function getDebugInfo()
     {
         return array ();
+=======
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDebugInfo()
+    {
+        return array (  99 => 49,  93 => 45,  89 => 43,  85 => 41,  80 => 38,  77 => 37,  75 => 36,  38 => 1,);
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     }
 
     public function getSourceContext()
@@ -134,6 +187,7 @@ class __TwigTemplate_ae1bb679fa0b84fdb1ee758b172b4d66 extends Template
             <div class=\"collapse navbar-collapse navbar-right navbar-main-collapse\">
 \t\t\t      <ul class=\"nav navbar-nav\">
 
+<<<<<<< HEAD
               <li><a href=\"/\">Accueil</a></li>
 
               <li><a href=\"/contact\">contact</a></li>
@@ -146,6 +200,27 @@ class __TwigTemplate_ae1bb679fa0b84fdb1ee758b172b4d66 extends Template
 
         
 \t\t\t  </ul>
+=======
+                    <li><a href=\"/\">Accueil</a></li>
+
+                    <li><a href=\"/contact\">Contact</a></li>
+
+                    <li><a href=\"/actualites\">Actualites</a></li>
+                    {% if session.logged_in %}
+                        {% if session.user_is_admin %}
+                            <li><a href=\"/bookings/listbooking\">Liste Consultations</a></li>
+                            <li><a href=\"/users/listuser\">Liste utilisateurs</a></li>
+                        {% else %}
+                            <li><a href=\"/booking\">Booking</a></li>
+                        {% endif %}
+                        <li><a href=\"/logout\">Déconnexion</a></li>
+                    {% else %}
+                        <li><a href=\"/booking\">Booking</a></li>
+                        <li><a href=\"/register\">Inscription</a></li>
+                        <li><a href=\"/booking\">Connexion</a></li>
+                    {% endif %}
+\t\t\t        </ul>
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
             </div>
             <!-- /.navbar-collapse -->
         </div>

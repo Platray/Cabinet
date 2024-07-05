@@ -21,6 +21,7 @@ class BookingController {
         echo $this->twig->render('booking.twig');
     }
 
+<<<<<<< HEAD
     public function create() {
         $postData = $_POST;
 
@@ -34,6 +35,78 @@ class BookingController {
             echo $this->twig->render('booking.twig', ['error_message' => 'Erreur : test existant ' . $result['message']]);
         }
     }
+=======
+    public function showBookings() {
+        $bookings = $this->bookingModel->getBookings();
+        echo $this->twig->render('booking/listbooking.twig', ['bookings' => $bookings]);
+    }
+
+    public function confirmBooking($id) {
+        $this->bookingModel->confirmBooking($id);
+        header('Location: /bookings');
+        exit;
+    }
+
+    public function editBooking($id) {
+        $booking = $this->bookingModel->getBookingById($id);
+        echo $this->twig->render('bookings/edit.html.twig', ['booking' => $booking]);
+    }
+
+    public function updateBooking($id, $data) {
+        $this->bookingModel->updateBooking($id, $data);
+        header('Location: /bookings');
+        exit;
+    }
+
+    public function deleteBooking($id) {
+        $this->bookingModel->deleteBooking($id);
+        header('Location: /bookings');
+        exit;
+    }
+
+    public function showBookingsAdm() {
+        if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
+            header('Location: /login');
+            exit();
+        }
+
+        $bookings = $this->bookingModel->getBookings();
+        echo $this->twig->render('bookings.twig', [
+            'bookings' => $bookings,
+            'logged_in' => $_SESSION['logged_in'],
+            'user_name' => $_SESSION['user_name']
+        ]);
+    }
+    public function create() {
+        // Vérifier si les données du formulaire sont présentes
+        if (isset($_POST['date'], $_POST['hour'], $_POST['email'], $_POST['lastname'], $_POST['firstname'], $_POST['birthday'])) {
+            $postData = [
+                'date' => $_POST['date'],
+                'hour' => $_POST['hour'],
+                'email' => $_POST['email'],
+                'lastname' => $_POST['lastname'],
+                'firstname' => $_POST['firstname'],
+                'birthday' => $_POST['birthday']
+            ];
+
+            // Appeler la méthode createBooking() du modèle BookingModel
+            $result = $this->bookingModel->createBooking($postData);
+
+            if ($result['success']) {
+                // Redirection vers une page de succès ou vers la liste des réservations
+                header('Location: /bookings');
+                exit();
+            } else {
+                // Gérer les erreurs si la création de la réservation échoue
+                echo "Erreur lors de la création de la réservation : " . $result['message'];
+            }
+        } else {
+            // Gérer le cas où des données requises sont manquantes
+            echo "Tous les champs sont requis.";
+        }
+    }
+    
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 }
 
 // // Debug: Afficher les données reçues

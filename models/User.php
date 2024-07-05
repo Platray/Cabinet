@@ -8,8 +8,15 @@ class User
     public $firstname;
     public $lastname;
     public $email;
+<<<<<<< HEAD
     public $birthday;
     public $isAdmin;
+=======
+    public $password;
+    public $birthday;
+    public $isAdmin;
+    public $createdAt;
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 
     public function __construct()
     {
@@ -62,6 +69,7 @@ class User
          return $stmt;
      }
 
+<<<<<<< HEAD
     
     // // Lire un seul post
     // public function readOne()
@@ -107,4 +115,14 @@ class User
     //     }
     //     return false;
     // }
+=======
+     public function getUserByEmail($email) {
+        $query = "SELECT * FROM " . $this->table . " WHERE email = :email LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 }

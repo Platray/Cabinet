@@ -3,7 +3,11 @@
         'name' => '__root__',
         'pretty_version' => '1.0.0+no-version-set',
         'version' => '1.0.0.0',
+<<<<<<< HEAD
         'reference' => null,
+=======
+        'reference' => NULL,
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +17,11 @@
         '__root__' => array(
             'pretty_version' => '1.0.0+no-version-set',
             'version' => '1.0.0.0',
+<<<<<<< HEAD
             'reference' => null,
+=======
+            'reference' => NULL,
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

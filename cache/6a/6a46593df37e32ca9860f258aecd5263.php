@@ -98,6 +98,17 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
 \t\t\t\t<div class=\"row d-flex-center\">
 
 \t\t\t\t\t<div class=\"col-lg-6\">
+<<<<<<< HEAD
+=======
+\t\t\t\t\t";
+        // line 49
+        if (((CoreExtension::getAttribute($this->env, $this->source, ($context["user"] ?? null), "isAdmin", [], "any", false, false, false, 49) != 0) && (CoreExtension::getAttribute($this->env, $this->source, ($context["user"] ?? null), "isAdmin", [], "any", false, false, false, 49) != 1))) {
+            // line 50
+            yield "\t\t\t\t\t\t";
+            if ((CoreExtension::getAttribute($this->env, $this->source, ($context["user"] ?? null), "isAdmin", [], "any", false, false, false, 50) == 0)) {
+                // line 51
+                yield "
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 \t\t\t\t\t\t<div class=\"form-wrapper\">
 \t\t\t\t\t\t\t<div class=\"wow fadeInRight\" data-wow-duration=\"2s\" data-wow-delay=\"0.2s\">
 
@@ -150,6 +161,7 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
 \t\t\t\t\t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t\t\t\t\t\t<p class=\"lead-footer\">* On vous contactera pour valider votre rendez-vous</p>
                                             ";
+<<<<<<< HEAD
         // line 100
         if (($context["error_message"] ?? null)) {
             // line 101
@@ -158,6 +170,16 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
         }
         // line 103
         yield "\t\t\t\t\t\t\t\t\t\t</form>
+=======
+                // line 103
+                if (($context["error_message"] ?? null)) {
+                    // line 104
+                    yield "                                            <p class=\"lead-footer\" style=\"color:red\"> Erreur lors de la prise de rendez vous</p>
+                                            ";
+                }
+                // line 106
+                yield "\t\t\t\t\t\t\t\t\t\t</form>
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 
 
 \t\t\t\t\t\t\t\t\t</div>
@@ -165,7 +187,100 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
 
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
+<<<<<<< HEAD
 \t\t\t\t\t</div>
+=======
+\t\t\t\t\t\t";
+            } elseif ((CoreExtension::getAttribute($this->env, $this->source,             // line 114
+($context["user"] ?? null), "isAdmin", [], "any", false, false, false, 114) == 1)) {
+                // line 115
+                yield "\t\t\t\t\t\t\t<h1>Liste des Bookings</h1>
+\t\t\t\t\t\t\t<table>
+\t\t\t\t\t\t\t\t<thead>
+\t\t\t\t\t\t\t\t\t<tr>
+\t\t\t\t\t\t\t\t\t\t<th>ID</th>
+\t\t\t\t\t\t\t\t\t\t<th>Nom du Patient</th>
+\t\t\t\t\t\t\t\t\t\t<th>Date</th>
+\t\t\t\t\t\t\t\t\t\t<th>Actions</th>
+\t\t\t\t\t\t\t\t\t</tr>
+\t\t\t\t\t\t\t\t</thead>
+\t\t\t\t\t\t\t\t<tbody>
+\t\t\t\t\t\t\t\t\t";
+                // line 126
+                $context['_parent'] = $context;
+                $context['_seq'] = CoreExtension::ensureTraversable(($context["bookings"] ?? null));
+                foreach ($context['_seq'] as $context["_key"] => $context["booking"]) {
+                    // line 127
+                    yield "\t\t\t\t\t\t\t\t\t\t<tr>
+\t\t\t\t\t\t\t\t\t\t\t<td>";
+                    // line 128
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["booking"], "booking_id", [], "any", false, false, false, 128), "html", null, true);
+                    yield "</td>
+\t\t\t\t\t\t\t\t\t\t\t<td>";
+                    // line 129
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["booking"], "patient_name", [], "any", false, false, false, 129), "html", null, true);
+                    yield "</td>
+\t\t\t\t\t\t\t\t\t\t\t<td>";
+                    // line 130
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["booking"], "booking_date", [], "any", false, false, false, 130), "html", null, true);
+                    yield "</td>
+\t\t\t\t\t\t\t\t\t\t\t<td>
+\t\t\t\t\t\t\t\t\t\t\t\t<form method=\"post\" action=\"/deleteBooking/";
+                    // line 132
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["booking"], "booking_id", [], "any", false, false, false, 132), "html", null, true);
+                    yield "\" style=\"display:inline;\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\">Supprimer</button>
+\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t\t<form method=\"post\" action=\"/updateBooking/";
+                    // line 135
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["booking"], "booking_id", [], "any", false, false, false, 135), "html", null, true);
+                    yield "\" style=\"display:inline;\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"date\" value=\"";
+                    // line 136
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["booking"], "booking_date", [], "any", false, false, false, 136), "html", null, true);
+                    yield "\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\">Modifier</button>
+\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t</td>
+\t\t\t\t\t\t\t\t\t\t</tr>
+\t\t\t\t\t\t\t\t\t";
+                }
+                $_parent = $context['_parent'];
+                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['booking'], $context['_parent'], $context['loop']);
+                $context = array_intersect_key($context, $_parent) + $_parent;
+                // line 142
+                yield "\t\t\t\t\t\t\t\t</tbody>
+\t\t\t\t\t\t\t</table>
+\t\t\t\t\t\t
+\t\t\t\t\t\t";
+            }
+            // line 146
+            yield "
+\t\t\t\t\t";
+        } else {
+            // line 147
+            yield "\t
+\t\t\t\t\t\t<p class=\"lead-footer\">Oups ! Vous devez être inscrit pour réserver.</p>
+
+\t\t\t\t\t\t<p class=\"lead-footer\">Vous avez un compte ?
+\t\t\t\t\t\t\t<div class=\"row d-flex-center\">
+\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-skin btn-lg flex-right\" onclick=\"window.location.href='/login'\">
+\t\t\t\t\t\t\t\tConnexion
+\t\t\t\t\t\t\t\t</button>
+\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t</p>
+\t\t\t\t\t\t<p class=\"lead-footer\">Pas encore inscrit ?
+\t\t\t\t\t\t\t<div class=\"row d-flex-center\">
+\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-skin btn-lg flex-right\" onclick=\"window.location.href='/register'\">
+\t\t\t\t\t\t\t\tInscription
+\t\t\t\t\t\t\t\t</button>
+\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t</p>
+\t\t\t\t\t";
+        }
+        // line 165
+        yield "\t\t\t\t\t</div>
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 \t\t\t\t</div>
 \t\t\t</div>
 \t\t</div>
@@ -198,7 +313,11 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
      */
     public function getDebugInfo()
     {
+<<<<<<< HEAD
         return array (  160 => 103,  156 => 101,  154 => 100,  89 => 37,  85 => 36,  48 => 3,  37 => 1,);
+=======
+        return array (  265 => 165,  245 => 147,  241 => 146,  235 => 142,  223 => 136,  219 => 135,  213 => 132,  208 => 130,  204 => 129,  200 => 128,  197 => 127,  193 => 126,  180 => 115,  178 => 114,  168 => 106,  164 => 104,  162 => 103,  108 => 51,  105 => 50,  103 => 49,  89 => 37,  85 => 36,  48 => 3,  37 => 1,);
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
     }
 
     public function getSourceContext()
@@ -251,6 +370,12 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
 \t\t\t\t<div class=\"row d-flex-center\">
 
 \t\t\t\t\t<div class=\"col-lg-6\">
+<<<<<<< HEAD
+=======
+\t\t\t\t\t{% if user.isAdmin != 0  and user.isAdmin != 1 %}
+\t\t\t\t\t\t{% if user.isAdmin == 0 %}
+
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 \t\t\t\t\t\t<div class=\"form-wrapper\">
 \t\t\t\t\t\t\t<div class=\"wow fadeInRight\" data-wow-duration=\"2s\" data-wow-delay=\"0.2s\">
 
@@ -313,6 +438,60 @@ class __TwigTemplate_0bc24fe849fdce799383cca501e7d206 extends Template
 
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
+<<<<<<< HEAD
+=======
+\t\t\t\t\t\t{% elseif user.isAdmin == 1 %}
+\t\t\t\t\t\t\t<h1>Liste des Bookings</h1>
+\t\t\t\t\t\t\t<table>
+\t\t\t\t\t\t\t\t<thead>
+\t\t\t\t\t\t\t\t\t<tr>
+\t\t\t\t\t\t\t\t\t\t<th>ID</th>
+\t\t\t\t\t\t\t\t\t\t<th>Nom du Patient</th>
+\t\t\t\t\t\t\t\t\t\t<th>Date</th>
+\t\t\t\t\t\t\t\t\t\t<th>Actions</th>
+\t\t\t\t\t\t\t\t\t</tr>
+\t\t\t\t\t\t\t\t</thead>
+\t\t\t\t\t\t\t\t<tbody>
+\t\t\t\t\t\t\t\t\t{% for booking in bookings %}
+\t\t\t\t\t\t\t\t\t\t<tr>
+\t\t\t\t\t\t\t\t\t\t\t<td>{{ booking.booking_id }}</td>
+\t\t\t\t\t\t\t\t\t\t\t<td>{{ booking.patient_name }}</td>
+\t\t\t\t\t\t\t\t\t\t\t<td>{{ booking.booking_date }}</td>
+\t\t\t\t\t\t\t\t\t\t\t<td>
+\t\t\t\t\t\t\t\t\t\t\t\t<form method=\"post\" action=\"/deleteBooking/{{ booking.booking_id }}\" style=\"display:inline;\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\">Supprimer</button>
+\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t\t<form method=\"post\" action=\"/updateBooking/{{ booking.booking_id }}\" style=\"display:inline;\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<input type=\"text\" name=\"date\" value=\"{{ booking.booking_date }}\">
+\t\t\t\t\t\t\t\t\t\t\t\t\t<button type=\"submit\">Modifier</button>
+\t\t\t\t\t\t\t\t\t\t\t\t</form>
+\t\t\t\t\t\t\t\t\t\t\t</td>
+\t\t\t\t\t\t\t\t\t\t</tr>
+\t\t\t\t\t\t\t\t\t{% endfor %}
+\t\t\t\t\t\t\t\t</tbody>
+\t\t\t\t\t\t\t</table>
+\t\t\t\t\t\t
+\t\t\t\t\t\t{% endif %}
+
+\t\t\t\t\t{% else %}\t
+\t\t\t\t\t\t<p class=\"lead-footer\">Oups ! Vous devez être inscrit pour réserver.</p>
+
+\t\t\t\t\t\t<p class=\"lead-footer\">Vous avez un compte ?
+\t\t\t\t\t\t\t<div class=\"row d-flex-center\">
+\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-skin btn-lg flex-right\" onclick=\"window.location.href='/login'\">
+\t\t\t\t\t\t\t\tConnexion
+\t\t\t\t\t\t\t\t</button>
+\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t</p>
+\t\t\t\t\t\t<p class=\"lead-footer\">Pas encore inscrit ?
+\t\t\t\t\t\t\t<div class=\"row d-flex-center\">
+\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-skin btn-lg flex-right\" onclick=\"window.location.href='/register'\">
+\t\t\t\t\t\t\t\tInscription
+\t\t\t\t\t\t\t\t</button>
+\t\t\t\t\t\t\t</div>
+\t\t\t\t\t\t</p>
+\t\t\t\t\t{% endif %}
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 \t\t\t\t\t</div>
 \t\t\t\t</div>
 \t\t\t</div>

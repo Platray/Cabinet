@@ -35,9 +35,13 @@
 
 {% block body %}
 
+<<<<<<< HEAD
 	<!-- DEBUT TEMPLATE RESA -->
 
 	<!-- Section: intro -->
+=======
+
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 		
 
 		<section id="intro" class="intro"> <div class="intro-content">
@@ -46,6 +50,12 @@
 				<div class="row d-flex-center">
 
 					<div class="col-lg-6">
+<<<<<<< HEAD
+=======
+					{% if user.isAdmin != 0  and user.isAdmin != 1 %}
+						{% if user.isAdmin == 0 %}
+
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 						<div class="form-wrapper">
 							<div class="wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.2s">
 
@@ -108,6 +118,60 @@
 
 							</div>
 						</div>
+<<<<<<< HEAD
+=======
+						{% elseif user.isAdmin == 1 %}
+							<h1>Liste des Bookings</h1>
+							<table>
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Nom du Patient</th>
+										<th>Date</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for booking in bookings %}
+										<tr>
+											<td>{{ booking.booking_id }}</td>
+											<td>{{ booking.patient_name }}</td>
+											<td>{{ booking.booking_date }}</td>
+											<td>
+												<form method="post" action="/deleteBooking/{{ booking.booking_id }}" style="display:inline;">
+													<button type="submit">Supprimer</button>
+												</form>
+												<form method="post" action="/updateBooking/{{ booking.booking_id }}" style="display:inline;">
+													<input type="text" name="date" value="{{ booking.booking_date }}">
+													<button type="submit">Modifier</button>
+												</form>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						
+						{% endif %}
+
+					{% else %}	
+						<p class="lead-footer">Oups ! Vous devez être inscrit pour réserver.</p>
+
+						<p class="lead-footer">Vous avez un compte ?
+							<div class="row d-flex-center">
+								<button type="submit" class="btn btn-skin btn-lg flex-right" onclick="window.location.href='/login'">
+								Connexion
+								</button>
+							</div>
+						</p>
+						<p class="lead-footer">Pas encore inscrit ?
+							<div class="row d-flex-center">
+								<button type="submit" class="btn btn-skin btn-lg flex-right" onclick="window.location.href='/register'">
+								Inscription
+								</button>
+							</div>
+						</p>
+					{% endif %}
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 					</div>
 				</div>
 			</div>

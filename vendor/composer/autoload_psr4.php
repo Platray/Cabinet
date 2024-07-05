@@ -11,6 +11,9 @@ return array(
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
+<<<<<<< HEAD
     'App\\Model\\' => array($baseDir . '/models'),
     'App\\Controller\\' => array($baseDir . '/controllers'),
+=======
+>>>>>>> 9c9846b346baadfaf03dffd98fb72f22692600f6
 );
