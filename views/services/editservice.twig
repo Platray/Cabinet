@@ -1,0 +1,39 @@
+{% extends "base.twig" %}
+
+{% block title %}
+    <title>Modifier le Service</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Modifier le Service</h1>
+
+    <section id="intro" class="intro">
+        <div class="intro-content">
+            <div class="container">
+                <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
+                    <h2 class="h-ultra">Modifier le service</h2>
+                </div>
+
+                <div class="login-wrap">
+                    <div class="login-html">
+                        <div class="login-form">
+                            <form id="serviceForm" method="post" action="/saveservice/{{ service.service_id }}">
+                                <label>ID du Service</label>
+                                <input id="id" name="id" type="text" class="input" value="{{ service.service_id }}" readonly>
+                                
+                                <label>Nom du Service</label>
+                                <input id="title" name="title" type="text" class="input" value="{{ service.title }}" required>
+                                                        
+                                <label>Description du Service</label>
+                                <textarea id="description" name="description" class="input" required>{{ service.description }}</textarea>
+                                                        
+                                
+                                <input type="submit" class="button" value="Enregistrer">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.twig" %}
+
+{% block title %}
+    <title>Liste des Actualités</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Liste des Actualités</h1>
+
+    <section id="boxes" class="home-section paddingtop-120">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <a href="/posts/editpost" class="btn btn-primary">Créer un nouvel article</a>
+                </div>
+            </div>
+            <div class="row">
+                {% if posts is defined and posts|length > 0 %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Titre</th>
+                                    <th>Modifié le</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for post in posts %}
+                                    <tr>
+                                        <td>{{ post.id }}</td>
+                                        <td>{{ post.title }}</td>
+                                        <td>{{ post.updated_at }}</td>
+                                        <td>
+                                            <a href="/posts/editpost/{{ post.id }}" class="btn btn-primary">Modifier</a>
+                                            <form method="post" action="/posts/deletepost/{{ post.id }}" style="display:inline;">
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p>Aucun article disponible.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

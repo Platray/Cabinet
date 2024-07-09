@@ -23,22 +23,5 @@ class FrontController {
         echo $this->twig->render('contact');
     }
 
-    
-
-    //Fonctions posts
-    public function getLastPosts() {
-        return $this->postModel->readLast();
-    }
-
-    public function getAllPosts(){
-        return $this->postModel->read();
-    }
-
-    
-
-    
-     
-
-   
 }
 ?>

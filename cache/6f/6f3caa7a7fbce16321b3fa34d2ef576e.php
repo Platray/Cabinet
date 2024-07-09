@@ -272,6 +272,7 @@ class __TwigTemplate_786d15f5fe85104badeb4f6e67354470 extends Template
 \t
 {% endblock %}
 
-                        ", "login.twig", "D:\\xampp\\htdocs\\Cabinet\\views\\login.twig");
+                        
+", "login.twig", "D:\\xampp\\htdocs\\Cabinet\\views\\login.twig");
     }
 }

@@ -1,0 +1,50 @@
+{% extends "base.twig" %}
+
+{% block title %}
+    <title>Liste des Services</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Liste des Services</h1>
+
+    <section id="boxes" class="home-section paddingtop-120">
+        <div class="container">
+            <div class="row">
+                <a href="/createservice" class="btn btn-primary">Ajouter un service</a>
+                {% if services is defined and services|length > 0 %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nom du Service</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for service in services %}
+                                    <tr>
+                                        <td>{{ service.service_id  }}</td>
+                                        <td>{{ service.title }}</td>
+                                        <td>{{ service.description }}</td>
+                                        <td>
+                                            <form method="post" action="/editservice/{{ service.service_id  }}" style="display:inline;">
+                                                <button type="submit" class="btn btn-primary">Modifier</button>
+                                            </form>
+                                            <form method="post" action="/deleteservice/{{ service.service_id  }}" style="display:inline;">
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p>Aucun service disponible.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

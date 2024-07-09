@@ -14,6 +14,7 @@ class AuthController {
         $this->user = new User();
 
     }
+    
     public function login($email, $password) {
         $user = $this->user->getUserByEmail($email);
         if ($user && password_verify($password, $user['password'])) {

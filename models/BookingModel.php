@@ -1,27 +1,31 @@
 <?php
 
-//namespace App\Model;
-
 require_once __DIR__ . '/../config/Database.php';
-
 
 class BookingModel {
     private $conn;
     private $table = 'booking';
     private $table_open = 'open';
+    private $table_services = 'services';
     
-    public function __construct()
-    {
+    public function __construct() {
         $database = new Database();
         $this->conn = $database->getConnection();
     }
-    public function getBookings() {
-        $query = "SELECT * FROM " . $this->table;
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 
+    //fonction liste booking en récupérant les services associés selon le service_id en lien avec la table service_id (on affichera le titre du service lié à l'id)
+     public function getBookings() {
+         $query = "
+             SELECT booking.*, services.title AS service_title
+             FROM " . $this->table . " AS booking
+             LEFT JOIN " . $this->table_services . " AS services ON booking.service_id = services.service_id
+         ";
+         $stmt = $this->conn->prepare($query);
+         $stmt->execute();
+         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+     }
+
+    //fonction recup booking selon id
     public function getBookingById($id) {
         $query = "SELECT * FROM " . $this->table . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
@@ -30,22 +34,19 @@ class BookingModel {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function confirmBooking($id) {
-        $query = "UPDATE " . $this->table . " SET isConfirmed = 1 WHERE id = :id";
+    //fonction booking update selon id
+    public function updateBooking($id, $mail, $date, $time, $isConfirm) {
+        $query = "UPDATE " . $this->table . " SET book_email = :mail, date_book = :date, isConfirm = :isConfirm WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':mail', $mail);
+        $dateTime = date('Y-m-d H:i:s', strtotime("$date $time"));
+        $stmt->bindParam(':date', $dateTime);
+        $stmt->bindParam(':isConfirm', $isConfirm);
         return $stmt->execute();
     }
 
-    public function updateBooking($id, $data) {
-        $query = "UPDATE " . $this->table . " SET service_id = :service_id, booking_date = :booking_date WHERE id = :id";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':service_id', $data['service_id']);
-        $stmt->bindParam(':booking_date', $data['booking_date']);
-        $stmt->bindParam(':id', $id);
-        return $stmt->execute();
-    }
-
+    //fonction supprimer booking selon id
     public function deleteBooking($id) {
         $query = "DELETE FROM " . $this->table . " WHERE id = :id";
         $stmt = $this->conn->prepare($query);
@@ -53,67 +54,72 @@ class BookingModel {
         return $stmt->execute();
     }
 
-    public function createBooking($postData) {
-        // Extraire les données du formulaire
-        $date = $postData['date'];
-        $hour = $postData['hour'];
-        $email = $postData['email'];
-        $lastname = $postData['lastname'];
-        $firstname = $postData['firstname'];
-        $birthday = $postData['birthday'];
-
-        // Vérifier les heures d'ouverture et autres conditions
-        $dayOfWeek = date('l', strtotime($date));
-        $timeOfBooking = date('H:i:s', strtotime($hour));
-
-        // Requête pour vérifier les heures d'ouverture
-        $stmt = $this->conn->prepare('
-            SELECT open.open, open.close, open.isOpen 
-            FROM ' . $this->table_open . ' AS open
-            WHERE open.day = :dayOfWeek
-        ');
-        $stmt->execute([':dayOfWeek' => $dayOfWeek]);
-        $openHours = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if (!$openHours || !$openHours['isOpen']) {
-            return ['success' => false, 'message' => 'Nous sommes fermés ce jour-là.'];
-        }
-
-        // Vérifier si l'heure de la réservation est dans les heures d'ouverture
-        if ($timeOfBooking < $openHours['open'] || $timeOfBooking > $openHours['close']) {
-            return ['success' => false, 'message' => 'La réservation doit être faite pendant les heures d\'ouverture.'];
-        }
-
-        // Vérifier s'il y a déjà une réservation à cette date et heure
-        $stmt = $this->conn->prepare('
-            SELECT * FROM ' . $this->table . ' AS booking
-            WHERE booking.date = :date
-              AND booking.hour = :hour
-        ');
-        $stmt->execute([':date' => $date, ':hour' => $hour]);
-        $existingBooking = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($existingBooking) {
-            return ['success' => false, 'message' => 'Il existe déjà une réservation à cette date et heure.'];
-        }
-
-        // Créer la réservation
-        $stmt = $this->conn->prepare('
-            INSERT INTO ' . $this->table . ' (lastname, firstname, birthday, email, date, hour)
-            VALUES (:lastname, :firstname, :birthday, :email, :date, :hour)
-        ');
-        $stmt->execute([
-            ':lastname' => $lastname,
-            ':firstname' => $firstname,
-            ':birthday' => $birthday,
-            ':email' => $email,
-            ':date' => $date,
-            ':hour' => $hour
-        ]);
-
-        return ['success' => true];
+    //fonction verif dispo sur la journée selon le service et le datetime
+    public function checkAvailability($serviceId, $dateTime) {
+        $sql = "SELECT COUNT(*) AS count FROM bookings WHERE service_id = :service_id AND date_book = :date_book";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':service_id', $serviceId, PDO::PARAM_INT);
+        $stmt->bindParam(':date_book', $dateTime);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'] == 0;
     }
-    
+
+    //fonction recup id service selon son titre
+    public function getServiceId($serviceTitle) {
+        $sql = "SELECT service_id FROM services WHERE title = :title";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':title', $serviceTitle, PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['service_id'] : null;
+    }
+
+    //fonction recup service selon le service_id lié à la table services
+    public function getServices() {
+        $stmt = $this->conn->prepare("SELECT service_id AS id, title FROM services");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    //fonction recuperer les jours ouverts pour booking
+    public function getOpenDays() {
+        $sql = "SELECT day, isOpen FROM open";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    //fonction recuperer si oui ou non le jour selectionné est ouvert (lors de resa)
+    public function isDayOpen($day) {
+        $sql = "SELECT isOpen FROM open WHERE day = :day";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':day', $day, PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result && $result['isOpen'] == 1;
+    }
+
+    //fonction recuperer si il y a deja une resa (verif pour pas de doublon)
+    public function isBookingExists($date_book, $service_id) {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM booking WHERE date_book = :date_book AND service_id = :service_id");
+        $stmt->bindParam(':date_book', $date_book);
+        $stmt->bindParam(':service_id', $service_id);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+
+    //fonction creation de la resa
+    public function createBooking($service_id, $user_email, $date_book) {
+        $stmt = $this->conn->prepare("INSERT INTO booking (service_id, book_email, date_book, isConfirm) VALUES (:service_id, :book_email, :date_book, 0)");
+        $stmt->bindParam(':service_id', $service_id);
+        $stmt->bindParam(':book_email', $user_email);
+        $stmt->bindParam(':date_book', $date_book);
+        if (!$stmt->execute()) {
+            throw new Exception('Erreur lors de la création de la réservation.');
+        }
+    }
 
     
 }

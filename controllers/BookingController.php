@@ -1,119 +1,166 @@
 <?php
 require_once __DIR__ . '/../models/BookingModel.php';
-//namespace App\Controller;
-
-//use BookingModel;
 use Twig\Environment;
 
 class BookingController {
     private $twig;
     private $bookingModel;
-    
-    //public function __construct(Environment $twig, BookingModel $bookingModel) {
+
     public function __construct(Environment $twig) {
-        
         global $twig;
         $this->twig = $twig;
         $this->bookingModel = new BookingModel();
     }
 
+    //fonction afficher pour formulaire
     public function showForm() {
-        echo $this->twig->render('booking.twig');
-    }
-
-    public function showBookings() {
-        $bookings = $this->bookingModel->getBookings();
-        echo $this->twig->render('booking/listbooking.twig', ['bookings' => $bookings]);
-    }
-
-    public function confirmBooking($id) {
-        $this->bookingModel->confirmBooking($id);
-        header('Location: /bookings');
-        exit;
-    }
-
-    public function editBooking($id) {
-        $booking = $this->bookingModel->getBookingById($id);
-        echo $this->twig->render('bookings/edit.html.twig', ['booking' => $booking]);
-    }
-
-    public function updateBooking($id, $data) {
-        $this->bookingModel->updateBooking($id, $data);
-        header('Location: /bookings');
-        exit;
-    }
-
-    public function deleteBooking($id) {
-        $this->bookingModel->deleteBooking($id);
-        header('Location: /bookings');
-        exit;
-    }
-
-    public function showBookingsAdm() {
-        if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
-            header('Location: /login');
-            exit();
-        }
-
-        $bookings = $this->bookingModel->getBookings();
-        echo $this->twig->render('bookings.twig', [
-            'bookings' => $bookings,
-            'logged_in' => $_SESSION['logged_in'],
-            'user_name' => $_SESSION['user_name']
+        $services = $this->bookingModel->getServices();
+        echo $this->twig->render('booking.twig', [
+            'services' => $services,
         ]);
     }
+
+    //fonction création
     public function create() {
-        // Vérifier si les données du formulaire sont présentes
-        if (isset($_POST['date'], $_POST['hour'], $_POST['email'], $_POST['lastname'], $_POST['firstname'], $_POST['birthday'])) {
-            $postData = [
-                'date' => $_POST['date'],
-                'hour' => $_POST['hour'],
-                'email' => $_POST['email'],
-                'lastname' => $_POST['lastname'],
-                'firstname' => $_POST['firstname'],
-                'birthday' => $_POST['birthday']
-            ];
-
-            // Appeler la méthode createBooking() du modèle BookingModel
-            $result = $this->bookingModel->createBooking($postData);
-
-            if ($result['success']) {
-                // Redirection vers une page de succès ou vers la liste des réservations
-                header('Location: /bookings');
-                exit();
-            } else {
-                // Gérer les erreurs si la création de la réservation échoue
-                echo "Erreur lors de la création de la réservation : " . $result['message'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $book_date = $_POST['book_date'];
+            $service_id = $_POST['service_id'];
+            $book_time = $_POST['book_time'];
+            $user_email = $_SESSION['user_email'];
+            
+            // Combine date and time to form datetime
+            $date_book = $book_date . ' ' . $book_time . ':00';
+    
+            // Get the day of the week from the selected date
+            $date = new DateTime($book_date);
+            $dayOfWeekNumber = $date->format('N'); // 1 for Monday, 2 for Tuesday, etc.
+    
+            // Convert day number to French day name
+            switch ($dayOfWeekNumber) {
+                case 1:
+                    $dayOfWeek = 'lundi';
+                    break;
+                case 2:
+                    $dayOfWeek = 'mardi';
+                    break;
+                case 3:
+                    $dayOfWeek = 'mercredi';
+                    break;
+                case 4:
+                    $dayOfWeek = 'jeudi';
+                    break;
+                case 5:
+                    $dayOfWeek = 'vendredi';
+                    break;
+                case 6:
+                    $dayOfWeek = 'samedi';
+                    break;
+                case 7:
+                    $dayOfWeek = 'dimanche';
+                    break;
+                default:
+                    $dayOfWeek = '';
+                    break;
             }
-        } else {
-            // Gérer le cas où des données requises sont manquantes
-            echo "Tous les champs sont requis.";
+    
+            try {
+                // Check if the selected day is open
+                if (!$this->bookingModel->isDayOpen($dayOfWeek)) {
+                    echo "<script>alert('Le jour sélectionné n\'est pas ouvert.');</script>";
+                    $this->showForm();
+                    return;
+                }
+    
+                // Check if the time slot is available
+                if ($this->bookingModel->isBookingExists($date_book, $service_id)) {
+                    echo "<script>alert('Le créneau sélectionné est déjà réservé.');</script>";
+                    $this->showForm();
+                    return;
+                }
+    
+                // Create the booking
+                $this->bookingModel->createBooking($service_id, $user_email, $date_book);
+    
+                echo "<script>alert('Réservation créée avec succès.');</script>";
+                $this->showForm();
+            } catch (Exception $e) {
+                echo "<script>alert('" . $e->getMessage() . "');</script>";
+                $this->showForm();
+            }
         }
     }
+
+    //affichage adm
+    public function showBookings() {
+        $bookings = $this->bookingModel->getBookings();
+        echo $this->twig->render('bookings/listbooking.twig', ['bookings' => $bookings]);
+    }
+
+    //affichage adm
+    public function confirmBooking($id) {
+        $this->bookingModel->confirmBooking($id);
+        header('Location: /bookings/listbooking.twig');
+        exit;
+    }
+
+    //fonction edition selon id selectionné
+    public function editBooking($bookingId) {
+        try {
+            // Récupérer les détails de la réservation à éditer
+            $booking = $this->bookingModel->getBookingById($bookingId);
     
+            if (!$booking) {
+                // Si la réservation n'est pas trouvée, retourner une page 404
+                http_response_code(404);
+                render('404');
+                exit();
+            }
+    
+            // Récupérer les informations supplémentaires nécessaires pour l'édition (services, etc.)
+            $services = $this->bookingModel->getServices();
+    
+            // Rendre le template editbooking.twig avec les données récupérées
+            return $this->twig->render('/bookings/editbooking.twig', [
+                'booking' => $booking,
+                'services' => $services,
+            ]);
+        } catch (Exception $e) {
+            // En cas d'erreur, retourner une page d'erreur générale
+            http_response_code(500);
+            render('500');
+            exit();
+        }
+    }
+
+    //affichage adm
+    //fonction sauvegarde modif
+    public function saveBooking($postData) {
+        $id = $postData['id'];
+        $mail = $postData['mail'];
+        $date = $postData['date'];
+        $time = $postData['time'];
+        $isConfirm = $postData['isConfirm'];
+
+        $result = $this->bookingModel->updateBooking($id, $mail, $date, $time, $isConfirm);
+
+        if ($result) {
+            header('Location: /bookings/listbooking');
+            exit;
+        } else {
+            header('Location: /bookings/listbooking');
+            exit;
+        }
+    }
+
+    //affichage adm
+    public function deleteBooking($id) {
+        $this->bookingModel->deleteBooking($id);
+        header('Location: /bookings/listbooking');
+        exit;
+    }
+
+   
+    
+
 }
-
-// // Debug: Afficher les données reçues
-// var_dump($postData);
-// die(); // Arrêter l'exécution pour vérifier les données
-
-
-
-
-// public function createBooking() {
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //         $date = $_POST['date'];
-    //         $hour = $_POST['hour'];
-
-    //         // Combinaison de la date et de l'heure pour le champ booking_hour
-    //         $datetime = $date . ' ' . $hour;
-
-    //         if ($this->bookingModel->createBooking($date, $datetime)) {
-    //             echo 'Réservation réussie!';
-    //         } else {
-    //             echo 'Erreur lors de la réservation.';
-    //         }
-    //     }
-    // }
 ?>
-

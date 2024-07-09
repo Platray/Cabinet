@@ -1,0 +1,57 @@
+{% extends "base.twig" %}
+
+{% block title %}
+    <title>Modifier Horaire</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Modifier Horaire</h1>
+
+    <section id="intro" class="intro">
+        <div class="intro-content">
+            <div class="container">
+                <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
+                    <h2 class="h-ultra">Modifier l'horaire</h2>
+                </div>
+
+                <div class="login-wrap">
+                    <div class="login-html">
+                        <div class="login-form">
+                            <form id="hourForm" method="post" action="/savehour/{{ hour.id }}">
+                                <label>Jour</label>
+                                <p>{{ hour.day }}</p> <!-- Affichage du jour sous forme de texte -->
+
+                                <label>Ouverture</label>
+                                <input id="open" name="open" type="time" class="input" value="{{ hour.open }}">
+
+                                <label>Fermeture</label>
+                                <input id="close" name="close" type="time" class="input" value="{{ hour.close }}">
+
+                                <label for="isOpen">Ouvert :</label>
+                                <select id="isOpen" name="isOpen">
+                                    <option value="1" {{ hour.isOpen == 1 ? 'selected' : '' }}>OUVERT</option>
+                                    <option value="0" {{ hour.isOpen == 0 ? 'selected' : '' }}>FERME</option>
+                                </select>
+
+                                <input type="hidden" name="id" value="{{ hour.id }}">
+                                <input type="submit" class="button" value="Enregistrer">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('hourForm').addEventListener('submit', function(event) {
+            var open = document.getElementById('open').value;
+            var close = document.getElementById('close').value;
+
+            if (open >= close) {
+                alert("L'heure d'ouverture doit être inférieure à l'heure de fermeture.");
+                event.preventDefault(); // Empêche la soumission du formulaire
+            }
+        });
+    </script>
+{% endblock %}

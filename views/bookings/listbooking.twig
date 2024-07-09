@@ -4,44 +4,62 @@
     <title>Liste des réservations</title>
 {% endblock %}
 
+{% block body %}
+    <h1>Liste des Réservations</h1>
 
-{% block content %}
-<h1>Liste des Réservations</h1>
+    <section id="boxes" class="home-section paddingtop-120">
+        <div class="container">
+            <div class="row">
+                {% if bookings is defined and bookings|length > 0 %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Mail du Patient</th>
+                                    <th>Date</th>
+                                    <th>Service</th> <!-- Nouvelle colonne -->
+                                    <th>Actions</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for booking in bookings %}
+                                    <tr>
+                                        <td>{{ booking.id }}</td>
+                                        <td>{{ booking.book_email }}</td>
+                                        <td>{{ booking.date_book }}</td>
+                                        <td>{{ booking.service_title }}</td> <!-- Affichage du titre du service -->
+                                        <td>
+                                            <form method="post" action="../editbooking/{{ booking.id }}" style="display:inline;">
+                                                <button type="submit" class="btn btn-primary">Modifier</button>
+                                            </form>
+                                            <form method="post" action="/deleteBooking/{{ booking.id }}" style="display:inline;">
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            {% if booking.isConfirm == 1 %}
+                                                Confirmé
+                                            {% else %}
+                                                Non confirmé
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p>Aucune réservation disponible.</p>
+                {% endif %}
 
-{% if bookings is defined and bookings is not empty %}
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom du Patient</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for booking in bookings %}
-                <tr>
-                    <td>{{ booking.id }}</td>
-                    <td>{{ booking.patient_name }}</td>
-                    <td>{{ booking.date }}</td>
-                    <td>
-                        <form method="post" action="/deleteBooking/{{ booking.id }}" style="display:inline;">
-                            <button type="submit">Supprimer</button>
-                        </form>
-                        <form method="post" action="/updateBooking/{{ booking.id }}" style="display:inline;">
-                            <input type="text" name="date" value="{{ booking.date }}">
-                            <button type="submit">Modifier</button>
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>Aucune réservation disponible.</p>
-{% endif %}
-
-{% if message is defined %}
-    <p>{{ message }}</p>
-{% endif %}
+                {% if success_message is defined %}
+                    <p style="color: green;">{{ success_message }}</p>
+                {% elseif error_message is defined %}
+                    <p style="color: red;">{{ error_message }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.twig" %}
+
+{% block title %}
+    <title>Liste des utilisateurs</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Liste des Utilisateurs</h1>
+
+    <section id="boxes" class="home-section paddingtop-120">
+        <div class="container">
+            <div class="row">
+                <a href="/edituser" class="btn btn-primary">Ajouter un utilisateur</a>
+                {% if users is defined and users|length > 0 %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Email</th>
+                                    <th>Date de Naissance</th>
+                                    <th>Admin</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td>{{ user.id }}</td>
+                                        <td>{{ user.lastname }}</td>
+                                        <td>{{ user.firstname }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.birthday }}</td>
+                                        <td>{{ user.isAdmin == 1 ? 'Oui' : 'Non' }}</td>
+                                        <td>
+                                            <form method="post" action="/edituser/{{ user.id }}" style="display:inline;">
+                                                <button type="submit" class="btn btn-primary">Modifier</button>
+                                            </form>
+                                            <form method="post" action="/deleteuser/{{ user.id }}" style="display:inline;">
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p>Aucun utilisateur disponible.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

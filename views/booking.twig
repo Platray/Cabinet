@@ -1,170 +1,52 @@
-{% extends 'base.twig' %}
+{% extends "base.twig" %}
 
 {% block title %}
-	<head>
-		<title>Réservation de créneau horaire</title>
-
-		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script>
-            $(document).ready(function () {
-            $("#date").datepicker({
-            dateFormat: 'yy-mm-dd',
-            beforeShowDay: function (date) {
-            var day = date.getDay();
-            return [(day != 0 && day != 6), '']; // Bloquer les samedis et dimanches
-            }
-            });
-
-            $("#hour").on("change", function () {
-            var selectedTime = $(this).val();
-            var openingTime = "09:00";
-            var closingTime = "18:00";
-
-            if (selectedTime < openingTime || selectedTime > closingTime) {
-            alert("Les réservations ne sont possibles que de 09:00 à 18:00.");
-            $(this).val(''); // Réinitialiser l'heure si elle est en dehors des heures d'ouverture
-            }
-            });
-            });
-	    </script>
-	</head>
+    <title>Ajouter une réservation</title>
 {% endblock %}
 
-
 {% block body %}
+    <h1>Ajouter une Réservation</h1>
 
-		
+    <section id="add-booking-form" class="home-section paddingtop-120">
+        <div class="container">
+            <div class="row">
+                <form method="post" action="/booking">
+                    
+                    <div class="form-group">
+                        <label for="book_date">Date</label>
+                        <input type="date" class="form-control" id="book_date" name="book_date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service_id">Service</label>
+                        <select class="form-control" id="service_id" name="service_id" required>
+                            {% for service in services %}
+                                <option value="{{ service.id }}">{{ service.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="book_time">Heure</label>
+                        <select class="form-control" id="book_time" name="book_time" required>
+                            {% for hour in range(9, 18) %}
+                                {% for minute in [0, 30] %}
+                                    {% set time = "%02d:%02d" | format(hour, minute) %}
+                                    {% if time != '18:30' %}
+                                        <option value="{{ time }}">{{ time }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </form>
 
-		<section id="intro" class="intro"> <div class="intro-content">
-
-			<div class="container">
-				<div class="row d-flex-center">
-
-					<div class="col-lg-6">
-					{% if user.isAdmin != 0  and user.isAdmin != 1 %}
-						{% if user.isAdmin == 0 %}
-
-						<div class="form-wrapper">
-							<div class="wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.2s">
-
-								<div class="panel panel-skin">
-									<div class="panel-heading">
-										<h3 class="panel-title">
-											<span class="fa fa-pencil-square-o"></span>
-											Prenez rendez-vous
-										</h3>
-									</div>
-									<div class="panel-body">
-										<form method="post" action="/booking" role="form" class="lead">
-											<div class="row d-flex-center">
-												<div class="col-xs-6 col-sm-6 col-md-6">
-													<div class="form-group">
-														<label>Prenom</label>
-														<input type="text" name="firstname" id="firstname" class="form-control input-md" required>
-													</div>
-												</div>
-												<div class="col-xs-6 col-sm-6 col-md-6">
-													<div class="form-group">
-														<label>Nom</label>
-														<input type="text" name="lastname" id="lastname" class="form-control input-md" required>
-													</div>
-												</div>
-											</div>
-											<div class="row d-flex-center">
-												<div class="col-xs-6 col-sm-6 col-md-6">
-													<div class="form-group">
-														<label>Email</label>
-														<input type="email" name="email" id="email" class="form-control input-md" required>
-													</div>
-												</div>
-												<div class="col-xs-6 col-sm-6 col-md-6">
-													<div class="form-group">
-														<label>Date de naissance :
-														</label>
-														<input type="date" name="birthday" id="birthday" class="form-control input-md" required>
-													</div>
-												</div>
-											</div>
-											<div class="row d-flex-center">
-												<label for="date">Date réservation :</label>
-												<input type="date" id="date" name="date" required>
-												<label for="hour">Heure réservation :</label>
-												<input type="time" id="hour" name="hour" required>
-											</div>
-											<div class="row d-flex-center">
-												<button type="submit" class="btn btn-skin btn-lg flex-right">Réserver</button>
-											</div>
-											<p class="lead-footer">* On vous contactera pour valider votre rendez-vous</p>
-                                            {% if error_message %}
-                                            <p class="lead-footer" style="color:red"> Erreur lors de la prise de rendez vous</p>
-                                            {% endif %}
-										</form>
-
-
-									</div>
-								</div>
-
-							</div>
-						</div>
-						{% elseif user.isAdmin == 1 %}
-							<h1>Liste des Bookings</h1>
-							<table>
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>Nom du Patient</th>
-										<th>Date</th>
-										<th>Actions</th>
-									</tr>
-								</thead>
-								<tbody>
-									{% for booking in bookings %}
-										<tr>
-											<td>{{ booking.booking_id }}</td>
-											<td>{{ booking.patient_name }}</td>
-											<td>{{ booking.booking_date }}</td>
-											<td>
-												<form method="post" action="/deleteBooking/{{ booking.booking_id }}" style="display:inline;">
-													<button type="submit">Supprimer</button>
-												</form>
-												<form method="post" action="/updateBooking/{{ booking.booking_id }}" style="display:inline;">
-													<input type="text" name="date" value="{{ booking.booking_date }}">
-													<button type="submit">Modifier</button>
-												</form>
-											</td>
-										</tr>
-									{% endfor %}
-								</tbody>
-							</table>
-						
-						{% endif %}
-
-					{% else %}	
-						<p class="lead-footer">Oups ! Vous devez être inscrit pour réserver.</p>
-
-						<p class="lead-footer">Vous avez un compte ?
-							<div class="row d-flex-center">
-								<button type="submit" class="btn btn-skin btn-lg flex-right" onclick="window.location.href='/login'">
-								Connexion
-								</button>
-							</div>
-						</p>
-						<p class="lead-footer">Pas encore inscrit ?
-							<div class="row d-flex-center">
-								<button type="submit" class="btn btn-skin btn-lg flex-right" onclick="window.location.href='/register'">
-								Inscription
-								</button>
-							</div>
-						</p>
-					{% endif %}
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<!-- FIN TEMPLATE  RESA -->
+                {% if error_message is defined %}
+                    <p style="color: red;">{{ error_message }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

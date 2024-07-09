@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-        
     <!-- TEMPLATE DEB skin -->
+    {% block styles %}
     <!-- css -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="plugins/cubeportfolio/css/cubeportfolio.min.css">
-	<link href="css/nivo-lightbox.css" rel="stylesheet" />
-	<link href="css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
-	<link href="css/owl.carousel.css" rel="stylesheet" media="screen" />
-    <link href="css/owl.theme.css" rel="stylesheet" media="screen" />
-	<link href="css/animate.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet">
-
-	<!-- boxed bg -->
-	<link id="bodybg" href="bodybg/bg1.css" rel="stylesheet" type="text/css" />
-	<!-- template skin -->
-	<link id="t-colors" href="color/default.css" rel="stylesheet">
+    <link href="{{ BASE_URL }}css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ BASE_URL }}font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ BASE_URL }}plugins/cubeportfolio/css/cubeportfolio.min.css">
+    <link href="{{ BASE_URL }}css/nivo-lightbox.css" rel="stylesheet" />
+    <link href="{{ BASE_URL }}css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+    <link href="{{ BASE_URL }}css/owl.carousel.css" rel="stylesheet" media="screen" />
+    <link href="{{ BASE_URL }}css/owl.theme.css" rel="stylesheet" media="screen" />
+    <link href="{{ BASE_URL }}css/animate.css" rel="stylesheet" />
+    <link href="{{ BASE_URL }}css/style.css" rel="stylesheet">
+    <!-- boxed bg -->
+    <link id="bodybg" href="{{ BASE_URL }}bodybg/bg1.css" rel="stylesheet" type="text/css" />
+    <!-- template skin -->
+    <link id="t-colors" href="{{ BASE_URL }}color/default.css" rel="stylesheet">
+    {% endblock %}
     <!-- TEMPLATE FIN skin -->
     {% block title %}Mon Site{% endblock %}
 </head>
-
+<body>
     {% include 'partials/menu.twig' %}
 
     {% block body %}
     <div id="content">
-            {% block content %}
-            {% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
     {% endblock %}
 
     {% include 'partials/footer.twig' %}
-</html>
 
+    {% block javascripts %}
+    <!-- scripts communs à toutes les pages -->
+    <script src="{{ JS_URL }}js/jquery.min.js"></script>
+    <script src="{{ JS_URL }}js/bootstrap.min.js"></script>
+    <!-- script spécifique à la page de réservation -->
+    <script src="{{ JS_URL }}js/booking.js"></script>
+    {% endblock %}
+</body>
+</html>

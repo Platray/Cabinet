@@ -1,0 +1,49 @@
+{% extends "base.twig" %}
+
+{% block title %}
+    <title>Modifier Utilisateur</title>
+{% endblock %}
+
+{% block body %}
+    <h1>Modifier Utilisateur</h1>
+
+    <section id="intro" class="intro">
+        <div class="intro-content">
+            <div class="container">
+                <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
+                    <h2 class="h-ultra">Modifier l'utilisateur</h2>
+                </div>
+
+                <div class="login-wrap">
+                    <div class="login-html">
+                        
+                        <div class="login-form">
+                            
+                            <form method="post" action="/saveuser/{{ user.id }}">
+                                
+                                    <label >Nom</label>
+                                    <input id="lastname" name="lastname" type="text" class="input" value="{{ user.lastname }}">
+                                
+                                
+                                    <label >Prénom</label>
+                                    <input id="firstname" name="firstname" type="text" class="input" value="{{ user.firstname }}">
+                                
+                                
+                                    <label for="isAdmin">Admin :</label>
+                                    <input type="checkbox" id="isAdmin" name="isAdmin">
+                                
+                                
+                                    <input type="hidden" name="id" value="{{ user.id }}">
+                                    <input type="submit" class="button" value="Enregistrer">
+                                
+                            </form>
+
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

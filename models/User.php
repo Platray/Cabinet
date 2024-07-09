@@ -63,13 +63,50 @@ class User
          $stmt->execute();
          return $stmt;
      }
-
+    
+     // recupere un utilisateur par son mail
      public function getUserByEmail($email) {
         $query = "SELECT * FROM " . $this->table . " WHERE email = :email LIMIT 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // recupere les données utilisateurs
+    public function getUsers() {
+        $query = "SELECT id, lastname, firstname, email, birthday, isAdmin FROM " . $this->table;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // recupere un utilisateur par son id
+    public function getUserById($id) {
+        $query = "SELECT id, lastname, firstname, email, birthday, isAdmin FROM " . $this->table . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // modifie un utilisateur (par son id)
+    public function updateUser($id, $lastname, $firstname, $isAdmin) {
+        $query = "UPDATE " . $this->table . " SET lastname = :lastname, firstname = :firstname, isAdmin = :isAdmin WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':lastname', $lastname);
+        $stmt->bindParam(':firstname', $firstname);
+        $stmt->bindParam(':isAdmin', $isAdmin);
+        return $stmt->execute();
+    }
+
+    // supprime un utilisateur par son id
+    public function deleteUser($id) {
+        $query = "DELETE FROM " . $this->table . " WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
     }
     
 }

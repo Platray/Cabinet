@@ -38,72 +38,90 @@ class __TwigTemplate_ae1bb679fa0b84fdb1ee758b172b4d66 extends Template
         yield "<div id=\"wrapper\">
 
 <nav class=\"navbar navbar-custom navbar-fixed-top\" role=\"navigation\">
-\t\t<div class=\"top-area\">
-\t\t\t<div class=\"container\">
-\t\t\t\t<div class=\"row\">
-\t\t\t\t\t<div class=\"col-sm-6 col-md-6\">
-\t\t\t\t\t<p class=\"bold text-left\">Du Lundi au Vendredi - de 09:00:00 à 18:00:00</p>
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class=\"col-sm-6 col-md-6\">
-\t\t\t\t\t<p class=\"bold text-right\">Appelez moi au : 06 89 03 13 60</p>
-\t\t\t\t\t</div>
-\t\t\t\t</div>
-\t\t\t</div>
-\t\t</div>
-        <div class=\"container navigation\">
-\t\t
-            <div class=\"navbar-header page-scroll\">
-                <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-main-collapse\">
-                    <i class=\"fa fa-bars\"></i>
-                </button>
-                <a class=\"navbar-brand\" href=\"index.html\">
-                    <img src=\"img/logo.png\" alt=\"\" width=\"150\" height=\"40\" />
-                </a>
+    <div class=\"top-area\">
+        <div class=\"container\">
+            <div class=\"row\">
+                <div class=\"col-sm-6 col-md-6\">
+                    <p class=\"bold text-left\">Du Lundi au Vendredi - de 09:00:00 à 18:00:00</p>
+                </div>
+                <div class=\"col-sm-6 col-md-6\">
+                    <p class=\"bold text-right\">Appelez moi au : 06 89 03 13 60</p>
+                </div>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class=\"collapse navbar-collapse navbar-right navbar-main-collapse\">
-\t\t\t      <ul class=\"nav navbar-nav\">
-
-                    <li><a href=\"/\">Accueil</a></li>
-
-                    <li><a href=\"/contact\">Contact</a></li>
-
-                    <li><a href=\"/actualites\">Actualites</a></li>
-                    ";
-        // line 36
-        if (CoreExtension::getAttribute($this->env, $this->source, ($context["session"] ?? null), "logged_in", [], "any", false, false, false, 36)) {
-            // line 37
-            yield "                        ";
-            if (CoreExtension::getAttribute($this->env, $this->source, ($context["session"] ?? null), "user_is_admin", [], "any", false, false, false, 37)) {
-                // line 38
-                yield "                            <li><a href=\"/bookings/listbooking\">Liste Consultations</a></li>
-                            <li><a href=\"/users/listuser\">Liste utilisateurs</a></li>
-                        ";
-            } else {
-                // line 41
-                yield "                            <li><a href=\"/booking\">Booking</a></li>
-                        ";
-            }
-            // line 43
-            yield "                        <li><a href=\"/logout\">Déconnexion</a></li>
-                    ";
-        } else {
-            // line 45
-            yield "                        <li><a href=\"/booking\">Booking</a></li>
-                        <li><a href=\"/register\">Inscription</a></li>
-                        <li><a href=\"/booking\">Connexion</a></li>
-                    ";
-        }
-        // line 49
-        yield "\t\t\t        </ul>
-            </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
-    </nav>
+    </div>
+    <div class=\"container navigation\">
+        <div class=\"navbar-header page-scroll\">
+            <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-main-collapse\">
+                <i class=\"fa fa-bars\"></i>
+            </button>
+            <a class=\"navbar-brand\" href=\"/\">
+                <img src=\"";
+        // line 22
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(($context["BASE_URL"] ?? null), "html", null, true);
+        yield "img/logo.png\" alt=\"\" width=\"150\" height=\"40\" />
+            </a>
+        </div>
 
-</div>";
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class=\"collapse navbar-collapse navbar-right navbar-main-collapse\">
+            <ul class=\"nav navbar-nav\">
+                <li><a href=\"/\">Accueil</a></li>
+
+                ";
+        // line 31
+        if (CoreExtension::getAttribute($this->env, $this->source, ($context["session"] ?? null), "logged_in", [], "any", false, false, false, 31)) {
+            // line 32
+            yield "                    ";
+            if (CoreExtension::getAttribute($this->env, $this->source, ($context["session"] ?? null), "user_is_admin", [], "any", false, false, false, 32)) {
+                // line 33
+                yield "                        <li class=\"dropdown\">
+                            <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Actualites <b class=\"caret\"></b></a>
+                            <ul class=\"dropdown-menu\">
+                                <li><a href=\"/actualites\">Visualiser</a></li>
+                                <li><a href=\"/posts/listpost\">Modifier</a></li>
+                            </ul>
+                        </li>
+                        <li><a href=\"/bookings/listbooking\">Liste Consultations</a></li>
+                        <li><a href=\"/users/listuser\">Liste utilisateurs</a></li>
+                        <li><a href=\"/hours/listhour\">Horaires</a></li>
+                        <li><a href=\"/services/listservice\">Services</a></li>
+                    ";
+            } else {
+                // line 45
+                yield "                        <li><a href=\"/actualites\">Actualites</a></li>
+                        <li><a href=\"/services\">Services</a></li>
+                        <li><a href=\"/booking\">Booking</a></li>
+                        <li><a href=\"/contact\">A propos</a></li>
+                    ";
+            }
+            // line 50
+            yield "                    <li><a href=\"/logout\">Déconnexion</a></li>
+                ";
+        } else {
+            // line 52
+            yield "                    <li><a href=\"/actualites\">Actualites</a></li>
+                    <li><a href=\"/services\">Services</a></li>
+                    <li><a href=\"/booking\">Booking</a></li>
+                    <li><a href=\"/contact\">A propos</a></li>
+                    <li><a href=\"/register\">Inscription</a></li>
+                    <li><a href=\"/login\">Connexion</a></li>
+                ";
+        }
+        // line 59
+        yield "            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+</div>
+<!-- Include jQuery -->
+<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
+<!-- Include Bootstrap JS -->
+<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
+";
         return; yield '';
     }
 
@@ -128,7 +146,7 @@ class __TwigTemplate_ae1bb679fa0b84fdb1ee758b172b4d66 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  99 => 49,  93 => 45,  89 => 43,  85 => 41,  80 => 38,  77 => 37,  75 => 36,  38 => 1,);
+        return array (  112 => 59,  103 => 52,  99 => 50,  92 => 45,  78 => 33,  75 => 32,  73 => 31,  61 => 22,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -136,58 +154,73 @@ class __TwigTemplate_ae1bb679fa0b84fdb1ee758b172b4d66 extends Template
         return new Source("<div id=\"wrapper\">
 
 <nav class=\"navbar navbar-custom navbar-fixed-top\" role=\"navigation\">
-\t\t<div class=\"top-area\">
-\t\t\t<div class=\"container\">
-\t\t\t\t<div class=\"row\">
-\t\t\t\t\t<div class=\"col-sm-6 col-md-6\">
-\t\t\t\t\t<p class=\"bold text-left\">Du Lundi au Vendredi - de 09:00:00 à 18:00:00</p>
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class=\"col-sm-6 col-md-6\">
-\t\t\t\t\t<p class=\"bold text-right\">Appelez moi au : 06 89 03 13 60</p>
-\t\t\t\t\t</div>
-\t\t\t\t</div>
-\t\t\t</div>
-\t\t</div>
-        <div class=\"container navigation\">
-\t\t
-            <div class=\"navbar-header page-scroll\">
-                <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-main-collapse\">
-                    <i class=\"fa fa-bars\"></i>
-                </button>
-                <a class=\"navbar-brand\" href=\"index.html\">
-                    <img src=\"img/logo.png\" alt=\"\" width=\"150\" height=\"40\" />
-                </a>
+    <div class=\"top-area\">
+        <div class=\"container\">
+            <div class=\"row\">
+                <div class=\"col-sm-6 col-md-6\">
+                    <p class=\"bold text-left\">Du Lundi au Vendredi - de 09:00:00 à 18:00:00</p>
+                </div>
+                <div class=\"col-sm-6 col-md-6\">
+                    <p class=\"bold text-right\">Appelez moi au : 06 89 03 13 60</p>
+                </div>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class=\"collapse navbar-collapse navbar-right navbar-main-collapse\">
-\t\t\t      <ul class=\"nav navbar-nav\">
-
-                    <li><a href=\"/\">Accueil</a></li>
-
-                    <li><a href=\"/contact\">Contact</a></li>
-
-                    <li><a href=\"/actualites\">Actualites</a></li>
-                    {% if session.logged_in %}
-                        {% if session.user_is_admin %}
-                            <li><a href=\"/bookings/listbooking\">Liste Consultations</a></li>
-                            <li><a href=\"/users/listuser\">Liste utilisateurs</a></li>
-                        {% else %}
-                            <li><a href=\"/booking\">Booking</a></li>
-                        {% endif %}
-                        <li><a href=\"/logout\">Déconnexion</a></li>
-                    {% else %}
-                        <li><a href=\"/booking\">Booking</a></li>
-                        <li><a href=\"/register\">Inscription</a></li>
-                        <li><a href=\"/booking\">Connexion</a></li>
-                    {% endif %}
-\t\t\t        </ul>
-            </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
-    </nav>
+    </div>
+    <div class=\"container navigation\">
+        <div class=\"navbar-header page-scroll\">
+            <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-main-collapse\">
+                <i class=\"fa fa-bars\"></i>
+            </button>
+            <a class=\"navbar-brand\" href=\"/\">
+                <img src=\"{{ BASE_URL }}img/logo.png\" alt=\"\" width=\"150\" height=\"40\" />
+            </a>
+        </div>
 
-</div>", "partials/menu.twig", "D:\\xampp\\htdocs\\Cabinet\\views\\partials\\menu.twig");
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class=\"collapse navbar-collapse navbar-right navbar-main-collapse\">
+            <ul class=\"nav navbar-nav\">
+                <li><a href=\"/\">Accueil</a></li>
+
+                {% if session.logged_in %}
+                    {% if session.user_is_admin %}
+                        <li class=\"dropdown\">
+                            <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Actualites <b class=\"caret\"></b></a>
+                            <ul class=\"dropdown-menu\">
+                                <li><a href=\"/actualites\">Visualiser</a></li>
+                                <li><a href=\"/posts/listpost\">Modifier</a></li>
+                            </ul>
+                        </li>
+                        <li><a href=\"/bookings/listbooking\">Liste Consultations</a></li>
+                        <li><a href=\"/users/listuser\">Liste utilisateurs</a></li>
+                        <li><a href=\"/hours/listhour\">Horaires</a></li>
+                        <li><a href=\"/services/listservice\">Services</a></li>
+                    {% else %}
+                        <li><a href=\"/actualites\">Actualites</a></li>
+                        <li><a href=\"/services\">Services</a></li>
+                        <li><a href=\"/booking\">Booking</a></li>
+                        <li><a href=\"/contact\">A propos</a></li>
+                    {% endif %}
+                    <li><a href=\"/logout\">Déconnexion</a></li>
+                {% else %}
+                    <li><a href=\"/actualites\">Actualites</a></li>
+                    <li><a href=\"/services\">Services</a></li>
+                    <li><a href=\"/booking\">Booking</a></li>
+                    <li><a href=\"/contact\">A propos</a></li>
+                    <li><a href=\"/register\">Inscription</a></li>
+                    <li><a href=\"/login\">Connexion</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+</div>
+<!-- Include jQuery -->
+<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>
+<!-- Include Bootstrap JS -->
+<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>
+", "partials/menu.twig", "D:\\xampp\\htdocs\\Cabinet\\views\\partials\\menu.twig");
     }
 }
