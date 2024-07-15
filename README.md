@@ -1,4 +1,4 @@
-Projet réalisé de 0, template récupéré libre de droit gratuit.
+Projet réalisé de 0, template récupéré libre de droit.
 
 Lien du site déployé : https://rique.alwaysdata.net/
 
