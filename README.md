@@ -10,4 +10,4 @@ A réaliser durant aout/septembre :
 - Alimenter articles
 - Changer réservation actuelle pour un modèle calendrier LIVE
 - Vérif drop down accueil admin depuis et hors page index
-- 
+- conditionner modif article pour ne pas faire sauter les images
